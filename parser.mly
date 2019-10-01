@@ -81,7 +81,7 @@ extern:
 
 /* definition ::= 'def' prototype expression */
 definition:
-  | DEF prototype COLON expr               { Function($2, $4) }
+  | DEF prototype expr               { Function($2, $3) }
 ;
 
 toplevel:
