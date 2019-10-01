@@ -11,21 +11,24 @@ let rec main_loop lexbuf =
     | Ast.Sep ->
       Lexing.flush_input lexbuf;
       main_loop lexbuf
-    | Ast.Definition _ ->
+    | Ast.Definition e ->
       print_endline "parsed a function definition;";
+      print_endline (Ast.show_func e);
       prompto ()
-    | Ast.Extern _ ->
+    | Ast.Extern e ->
       print_endline "parsed a extern;";
+      print_endline (Ast.show_proto e);
       prompto ()
-    | Ast.Expression _ ->
+    | Ast.Expression e ->
       print_endline "parsed a top-level expr;";
+      print_endline (Ast.show_expr e);
       prompto ()
   with
     Parsing.Parse_error ->
     Lexing.flush_input lexbuf; prompto ()
 
 let main () =
-  print_string "ready> "; flush stdout;
+  print_newline (); print_string "ready> "; flush stdout;
   let lexbuf = Lexing.from_channel stdin in
   main_loop lexbuf
 
