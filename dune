@@ -1,0 +1,12 @@
+(ocamllex (modules lexer))
+(ocamlyacc (modules parser))
+
+(library
+ (name kaleidoscope_lib)
+ (modules :standard \ toplevel)
+ (libraries llvm))
+
+(executable
+ (name toplevel)
+ (modules toplevel)
+ (libraries llvm kaleidoscope_lib))
